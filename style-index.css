@@ -1,0 +1,891 @@
+/* Global layout */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+    --bg: #050509;
+    --bg-elevated: #0f1015;
+    --card-bg: #ffffff;
+    --card-border: #1f2933;
+    --text-main: #000000;
+    --text-muted: #9ca3af;
+    --text-intro: #434446;
+    --accent: #22c55e;
+    --accent-soft: rgba(34, 197, 94, 0.2);
+    --chip-bg: #111827;
+    --chip-active-bg: #f9fafb;
+    --chip-active-text: #111827;
+    --radius-card: 1.25rem;
+    --radius-pill: 999px;
+    --shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.7);
+    /* Team accent colors */
+    --dal: #0f75bc;   /* MAVS blue */
+    --hou: #ce1141;   /* Rockets red */
+    --sas: #4a4b4b;   /* SPURS silver */
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    /* background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%); */
+    background: radial-gradient(circle at top, #d9d9d9 0, #f4f4f4 45%, #ffffff 100%);
+    color: var(--text-main);
+}
+
+/* Page wrapper */
+.page {
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 16px 40px;
+}
+
+/* header */
+.site-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.site-header h1 {
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+}
+
+.tagline {
+    margin: 0 0 14px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent-soft);
+}
+
+.taglineLogo {
+    justify-content: space-evenly;
+}
+
+#dallasL {
+    margin-left: 50px;
+    margin-right: 25px;
+}
+#houstonL {
+    margin-right: 25px;
+    margin-left: 25px;
+}
+#sanantonioL {
+    margin-right: 60px;
+    margin-left: 35px;
+}
+
+.intro {
+    max-width: 680px;
+    margin: 0 auto;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-intro);
+}
+
+/* controls */
+/* .controls {
+    margin: 28px auto 20px;
+    padding: 18px 16px;
+    border-radius: 1.5rem;
+    background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.95),
+        rgba(15, 23, 42, 0.75)
+    );
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    backdrop-filter: blur(16px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 24px;
+    align-items: center;
+    justify-content: center;
+} */
+.controls {
+    margin: 28px auto 20px;
+    padding: 10px 14px 14px;
+    border-radius: 1.5rem;
+    background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.9),
+        rgba(15, 23, 42, 0.6)
+    );
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    backdrop-filter: blur(16px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 1000px;
+}
+  
+/* Toggle pill at top of filter bar */
+.filters-toggle {
+    align-self: center;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    background: rgba(15, 23, 42, 0.7);   /* semi-translucent */
+    color: #e5e7eb;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      transform 100ms ease,
+      box-shadow 160ms ease;
+  }
+  
+.filters-toggle:hover {
+    background: rgba(15, 23, 42, 0.95);
+    border-color: #f9fafb;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.8);
+    transform: translateY(-1px);
+}
+
+.filters-toggle-icon {
+    display: inline-block;
+    font-size: 0.7rem;
+    transition: transform 160ms ease;
+}
+
+/* The collapsible inner panel */
+.controls-body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 24px;
+    align-items: center;
+    justify-content: center;
+    max-height: 500px;
+    opacity: 1;
+    overflow: hidden;
+    transition:
+        max-height 220ms ease,
+        opacity 180ms ease,
+        transform 180ms ease;
+}
+
+/* Collapsed state: hide controls, keep the pill */
+.controls.collapsed .controls-body {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+}
+
+/* Rotate arrow when collapsed */
+.controls.collapsed .filters-toggle-icon {
+    transform: rotate(-90deg);
+}
+  
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 180px;
+}
+
+.filter-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    /* color: #9ca3af; */
+    color: white;
+}
+
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+/* buttons / chips */
+.chip {
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    background: var(--chip-bg);
+    color: var(--text-muted);
+    border-radius: var(--radius-pill);
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition:
+        background-color 160ms ease,
+        color 160ms ease,
+        transform 90ms ease,
+        box-shadow 160ms ease,
+        border-color 160ms ease;
+}
+
+.chip:hover {
+    border-color: rgba(148, 163, 184, 0.9);
+    /* color: var(--text-main); */
+    color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.chip.active {
+    background: var(--chip-active-bg);
+    color: var(--chip-active-text);
+    border-color: transparent;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.8);
+}
+
+.chip:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Status text */
+.status-message {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 8px 0 18px;
+}
+
+/* gallery layout */
+.gallery {
+    display: grid;
+    gap: 18px;
+}
+
+/* grid view */
+.gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+/* List view (second representation) */
+.gallery-list {
+    display: block;
+}
+
+.gallery-list .jersey-card {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Jersey card */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.jersey-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-card);
+    border: 1px solid rgba(15, 23, 42, 0.35);
+    box-shadow: 0 12px 25px rgba(15, 23, 42, 0.4);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    animation: fadeInUp 0.35s ease-out both;
+    transition:
+        transform 160ms ease,
+        box-shadow 160ms ease,
+        border-color 160ms ease;
+}
+
+/* .jersey-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: rgba(34, 197, 94, 0.75);
+  box-shadow: var(--shadow-soft);
+} */
+.jersey-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: var(--shadow-soft);
+}
+
+.jersey-card.team-dal:hover {
+    border-color: var(--dal);
+    box-shadow: 0 0 0 1px var(--dal), var(--shadow-soft);
+}
+
+.jersey-card.team-hou:hover {
+    border-color: var(--hou);
+    box-shadow: 0 0 0 1px var(--hou), var(--shadow-soft);
+}
+
+.jersey-card.team-sas:hover {
+    border-color: var(--sas);
+    box-shadow: 0 0 0 1px var(--sas), var(--shadow-soft);
+}
+
+
+/* Image area */
+.jersey-image-wrapper {
+    /* background: #000; */
+    background: #ffffff;
+    position: relative;
+    padding: 10px 10px 0;
+}
+
+.jersey-image-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: auto 12px 10px;
+    height: 1px;
+    border-radius: 999px;
+    opacity: 0.35;
+    background: radial-gradient(
+        circle at center,
+        rgba(34, 197, 94, 0.45),
+        transparent
+    );
+}
+
+.jersey-image-wrapper img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+}
+
+/* Meta area */
+.jersey-meta {
+    padding: 10px 12px 12px;
+    color: #020617;
+}
+
+.jersey-pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.pill {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border-radius: var(--radius-pill);
+    padding: 4px 8px;
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    background: rgba(248, 250, 252, 0.85);
+}
+
+.pill-team {
+    border-color: rgba(15, 23, 42, 0.95);
+    background: rgba(15, 23, 42, 0.95);
+    color: #f9fafb;
+}
+
+.pill-team {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 6px; 
+}
+
+.pill-team-logo {
+    display: block;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.pill-type {
+    border-color: rgba(34, 197, 94, 0.5);
+    background: rgba(240, 253, 250, 0.9);
+    color: #166534;
+}
+
+.pill-year {
+    border-color: rgba(148, 163, 184, 0.6);
+    background: rgba(241, 245, 249, 0.95);
+    color: #0f172a;
+}
+
+.jersey-title {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #020617;
+}
+
+/* List view tweaks */
+.gallery-list .jersey-image-wrapper {
+    padding: 8px;
+}
+
+.gallery-list .jersey-meta {
+    padding: 10px 14px 10px;
+}
+
+/* Footer */
+.site-footer {
+    margin-top: 28px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.site-footer a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+    .controls {
+        align-items: flex-start;
+    }
+
+    .gallery-list .jersey-card {
+        grid-template-columns: 110px 1fr;
+    }
+}
+
+
+.team-label {
+    font-size: 0.9rem;
+}
+  
+.team-label.team-dal { color: var(--dal); }
+.team-label.team-hou { color: var(--hou); }
+.team-label.team-sas { color: var(--sas); }
+  
+/*  TEAM-COLOR CARD HOVER --------------------------------------------------------------------------------*/
+.jersey-card.team-dal:hover .jersey-meta {
+    background-color: var(--dal);
+    color: #ffffff;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+.jersey-card.team-dal:hover {
+    background-color: var(--dal);
+}
+  
+.jersey-card.team-hou:hover .jersey-meta {
+    background-color: var(--hou);
+    color: #ffffff;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+.jersey-card.team-hou:hover {
+    background-color: var(--hou);
+}
+  
+.jersey-card.team-sas:hover .jersey-meta {
+    background-color: var(--sas);
+    color: #000000; /* Spurs silver works best with dark text */
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+.jersey-card.team-sas:hover {
+    background-color: var(--sas);
+}
+  
+/* make pills invert when the meta background changes?? works! */
+.jersey-card:hover .pill {
+    background: rgba(255,255,255,0.9);
+    color: #000;
+    border-color: transparent;
+}
+
+
+
+/*  PATCHWORK / PATTERN VIEW */
+
+.gallery-pattern {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(55px, 1fr));
+    gap: 4px;
+    max-width: 650px;
+    margin: 0 auto; /* center it */
+}
+  
+/* Base patch tile */
+.gallery-pattern .jersey-card {
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(15, 23, 42, 0.6);
+    box-shadow: none;
+    animation: none;
+    transform: none;
+    padding: 0;
+    z-index: 0;
+}
+  
+  /* In quilt view, hide image + normal meta content */
+.gallery-pattern .jersey-image-wrapper,
+.gallery-pattern .jersey-meta {
+    display: none;
+}
+  
+  /* Smooth hover in this mode too */
+.gallery-pattern .jersey-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    z-index: 20;
+}
+  
+  
+/* HOME: white-dominant patch for all teams */
+.gallery-pattern .jersey-card[data-type="Home"] {
+    background:
+      linear-gradient(to bottom,
+        #ffffff 0 65%,
+        rgba(148, 163, 184, 0.35) 65% 100%);
+}
+  
+/* AWAY: team-color stripes */
+/* Rockets away: red stripes */
+.gallery-pattern .jersey-card.team-hou[data-type="Away"] {
+    background:
+      repeating-linear-gradient(
+        45deg,
+        #ce1141,
+        #ce1141 10px,
+        #7f0a28 10px,
+        #7f0a28 20px
+      );
+}
+/* Mavs away: blue stripes */
+.gallery-pattern .jersey-card.team-dal[data-type="Away"] {
+    background:
+        repeating-linear-gradient(
+        -45deg,
+        #0f75bc,
+        #0f75bc 10px,
+        #063a5b 10px,
+        #063a5b 20px
+        );
+}
+/* Spurs away: black & grey stripes */
+.gallery-pattern .jersey-card.team-sas[data-type="Away"] {
+    background:
+        repeating-linear-gradient(
+        90deg,
+        #000000,
+        #000000 12px,
+        #4b5563 12px,
+        #4b5563 24px
+        );
+}
+  
+/* CITY / ALTERNATE / OTHER:
+    diagonal gradient with team color accent */
+
+.gallery-pattern .jersey-card[data-type="City"],
+.gallery-pattern .jersey-card[data-type="Alternate"],
+.gallery-pattern .jersey-card[data-type="Other"] {
+    background: linear-gradient(135deg, #020617, #111827);
+}
+  
+  /* Rockets special jerseys */
+.gallery-pattern .jersey-card.team-hou[data-type="City"],
+.gallery-pattern .jersey-card.team-hou[data-type="Alternate"],
+.gallery-pattern .jersey-card.team-hou[data-type="Other"] {
+    background: linear-gradient(135deg, #020617 0, #ce1141 55%, #111827 100%);
+}
+  
+/* Mavs special jerseys */
+.gallery-pattern .jersey-card.team-dal[data-type="City"],
+.gallery-pattern .jersey-card.team-dal[data-type="Alternate"],
+.gallery-pattern .jersey-card.team-dal[data-type="Other"] {
+    background: linear-gradient(135deg, #020617 0, #0f75bc 55%, #020617 100%);
+}
+  
+/* Spurs special jerseys */
+.gallery-pattern .jersey-card.team-sas[data-type="City"],
+.gallery-pattern .jersey-card.team-sas[data-type="Alternate"],
+.gallery-pattern .jersey-card.team-sas[data-type="Other"] {
+    background: linear-gradient(135deg, #000000 0, #4b5563 55%, #000000 100%);
+}
+  
+/* Year label in the corner = little stitched tag */
+.gallery-pattern .jersey-card::after {
+    content: attr(data-year);
+    position: absolute;
+    bottom: 5px;
+    right: 7px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(15, 23, 42, 0.9);
+    color: #f9fafb;
+}
+  
+/* Make the tag dark text when background is light (home jerseys) */
+.gallery-pattern .jersey-card[data-type="Home"]::after {
+    background: rgba(241, 245, 249, 0.9);
+    color: #020617;
+}
+  
+
+
+/*  PATCHWORK / PATTERN VIEW  */
+/* Hide patchwork tile by default (Grid/List) */
+/* .patchwork-tile {
+    display: none;
+}
+   */
+
+/* 
+.gallery-pattern {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 4px;
+} */
+
+/* Each card is just a square swatch here */
+/* .gallery-pattern .jersey-card {
+aspect-ratio: 1 / 1;
+border-radius: 10px;
+position: relative;
+overflow: hidden;
+border: 1px solid rgba(15, 23, 42, 0.6);
+box-shadow: none;
+animation: none;
+transform: none;
+padding: 0;
+} */
+
+/* Show the patchwork tile in this mode */
+/* .gallery-pattern .patchwork-tile {
+display: block;
+width: 100%;
+height: 100%;
+background-size: 220%;     
+background-position: center;
+background-repeat: no-repeat;
+transition: transform 0.25s ease, filter 0.25s ease;
+} */
+
+/* Hide the normal image + meta in patchwork mode */
+/* .gallery-pattern .jersey-image-wrapper,
+.gallery-pattern .jersey-meta {
+display: none;
+} */
+
+/* Hover: small drift & soft brighten */
+/* .gallery-pattern .jersey-card:hover .patchwork-tile {
+transform: scale(1.05);
+filter: brightness(1.1);
+} */
+
+/* Year tag like a stitched label in the corner */
+/* .gallery-pattern .jersey-card::after {
+content: attr(data-year);
+position: absolute;
+bottom: 5px;
+right: 7px;
+padding: 2px 6px;
+border-radius: 999px;
+font-size: 0.6rem;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+background: rgba(15, 23, 42, 0.9);
+color: #f9fafb;
+} */
+
+/* Make tag dark on light-ish patches (Home jerseys are usually white) */
+/* .gallery-pattern .jersey-card[data-type="Home"]::after {
+background: rgba(241, 245, 249, 0.9);
+color: #020617;
+} */
+
+
+/* In patchwork view, hide the normal image by default */
+/* .gallery-pattern .jersey-image-wrapper {
+    display: none;
+}
+   */
+/* On hover: show the full jersey image on top of the tile */
+/* .gallery-pattern .jersey-card:hover .jersey-image-wrapper {
+display: block;
+position: absolute;
+inset: 0;      
+padding: 4px;
+background: #000;        
+} */
+  
+/* Make the img fit nicely inside the square */
+/* .gallery-pattern .jersey-card:hover .jersey-image-wrapper img {
+width: 100%;
+height: 100%;
+object-fit: contain;    
+border-radius: 8px;
+} */
+
+/* When hovering, fade out the patchwork-texture and show the jersey */
+/* .gallery-pattern .jersey-card:hover .patchwork-tile {
+opacity: 0;
+transform: scale(1.0);
+filter: none;
+} */
+
+/* .gallery-pattern .jersey-card:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+} */
+
+/* SHOW full jersey WHEN CLICKED (expanded) */
+/* .gallery-pattern .jersey-card.expanded .jersey-image-wrapper {
+display: block;
+position: absolute;
+inset: 0;
+padding: 4px;
+background: #000;
+z-index: 999;
+} */
+
+/* Zoom-out full jersey image inside */
+/* .gallery-pattern .jersey-card.expanded .jersey-image-wrapper img {
+width: 100%;
+height: 100%;
+object-fit: contain;
+border-radius: 8px;
+} */
+  
+/* Hide the fabric tile when expanded */
+/* .gallery-pattern .jersey-card.expanded .patchwork-tile {
+opacity: 0;
+transform: scale(1.0);
+filter: none;
+} */
+
+/* Bringing the clicked block to front when expanded */
+/* .gallery-pattern .jersey-card.expanded {
+z-index: 30;
+transform: translateY(-2px);
+box-shadow: 0 8px 18px rgba(0,0,0,0.7);
+} */
+  
+
+/* PATCHWORK / PATTERN VIEW */
+
+/* Quilt layout */
+.gallery-pattern {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 4px;
+}
+  
+/* Base patch tile */
+.gallery-pattern .jersey-card {
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(15, 23, 42, 0.6);
+    box-shadow: none;
+    animation: none;
+    transform: none;
+    padding: 0;
+    z-index: 0;
+}
+  
+  /* Fabric swatch tile */
+.patchwork-tile {
+    display: none; 
+}
+  
+.gallery-pattern .patchwork-tile {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: 220%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 0.25s ease, transform 0.25s ease, filter 0.25s ease;
+}
+  
+/* Hide meta + normal image in patchwork mode by default */
+.gallery-pattern .jersey-image-wrapper,
+.gallery-pattern .jersey-meta {
+    display: none;
+}
+  
+/* Small depth on hover just for fun */
+.gallery-pattern .jersey-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+  
+/* Year tag */
+.gallery-pattern .jersey-card::after {
+    content: attr(data-year);
+    position: absolute;
+    bottom: 5px;
+    right: 7px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(15, 23, 42, 0.9);
+    color: #f9fafb;
+}
+  
+.gallery-pattern .jersey-card[data-type="Home"]::after {
+    background: rgba(241, 245, 249, 0.9);
+    color: #020617;
+}
+  
+  
+/* NOW SHOWING full jersey when clicked (expanded) EXPANDED ABSOLUTE POSTIIONG???*/
+.gallery-pattern .jersey-card.expanded .jersey-image-wrapper {
+    display: block;
+    position: absolute;
+    inset: 0;
+    padding: 4px;
+    background: #000;
+    z-index: 999;
+}
+  
+/* image inside expanded tile */
+.gallery-pattern .jersey-card.expanded .jersey-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+  
+/* Hidign the fabric tile when expanded */
+.gallery-pattern .jersey-card.expanded .patchwork-tile {
+    opacity: 0;
+    transform: scale(1.0);
+    filter: none;
+}
+  
+/* Bringing this block to front when expanded */
+.gallery-pattern .jersey-card.expanded {
+    z-index: 30;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.7);
+}
+  

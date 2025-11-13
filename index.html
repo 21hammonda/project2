@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Texas NBA Jersey Archive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style-index.css">
+</head>
+<body>
+    <div class="page">
+        <header class="site-header">
+        <h1>Texas NBA Jersey Archive</h1>
+        <!-- <p class="tagline">Houston Rockets • San Antonio Spurs • Dallas Mavericks</p> -->
+        <p class="tagline">
+            <span class="team-label team-dal">Dallas Mavericks</span> •
+            <span class="team-label team-hou">Houston Rockets</span> •
+            <span class="team-label team-sas">San Antonio Spurs</span>
+        </p>
+        <p class="taglineLogo">
+            <span class="dallas-logo"><img src="mavsLogo.png" alt="Dallas Mavs Logo" width="150px" id="dallasL"></span>
+            <span class="houston-logo"><img src="rocketsLogo.png" alt="Houston Rockets Logo" width="150px" id="houstonL"></span>
+            <span class="sanantonio-logo"><img src="spursLogo.png" alt="San Antonio Logo" width="150px" id="sanantonioL"></span>
+        </p>
+        <p class="intro">
+            This archive brings together modern and classic jerseys from all three Texas NBA teams,
+            pulled directly from three Are.na channels I made to catalogue team jersey design evolutions throughout the years. 
+            Explore how design, color, and identity evolve over time by
+            sorting jerseys by <strong>team</strong>, <strong>year</strong>, or <strong>jersey type</strong>,
+            and switching between <strong>grid</strong> and <strong>list</strong> views.
+        </p>
+        </header>
+
+        <!-- Controls: filters / sorting / view -->
+        <!-- <section class="controls"> -->
+        <!-- Team filter -->
+        <!-- <div class="filter-group">
+            <span class="filter-label">Team</span>
+            <div class="filter-row">
+            <button class="chip active" data-filter-team="All">All teams</button>
+            <button class="chip" data-filter-team="Dallas Mavericks">Mavericks</button>
+            <button class="chip" data-filter-team="Houston Rockets">Rockets</button>
+            <button class="chip" data-filter-team="San Antonio Spurs">Spurs</button>
+            </div>
+        </div> -->
+
+        <!-- Jersey type filter -->
+        <!-- <div class="filter-group">
+            <span class="filter-label">Jersey type</span>
+            <div class="filter-row">
+            <button class="chip active" data-filter-type="All">All types</button>
+            <button class="chip" data-filter-type="Home">Home</button>
+            <button class="chip" data-filter-type="Away">Away</button>
+            <button class="chip" data-filter-type="City">City</button>
+            <button class="chip" data-filter-type="Alternate">Alternate</button>
+            <button class="chip" data-filter-type="Other">Other</button>
+            </div>
+        </div> -->
+
+        <!-- NOW SORT by year -->
+        <!-- <div class="filter-group">
+            <span class="filter-label">Year</span>
+            <div class="filter-row">
+            <button class="chip active" data-sort="desc">Newest → Oldest</button>
+            <button class="chip" data-sort="asc">Oldest → Newest</button>
+            </div>
+        </div> -->
+
+        <!-- the view toggle (three different representations) ????????????????????????????-->
+        <!-- <div class="filter-group">
+            <span class="filter-label">View</span>
+            <div class="filter-row">
+            <button class="chip active" data-view="grid">Grid view</button>
+            <button class="chip" data-view="list">List view</button>
+            <button class="chip" data-view="pattern">Patchwork</button>
+            </div>
+        </div> -->
+<!-- 
+        </section> -->
+        <section class="controls" id="controls">
+            <!-- Toggle pill -->
+            <button id="filters-toggle" class="filters-toggle">
+              <span class="filters-toggle-label">Filters</span>
+              <span class="filters-toggle-icon">▾</span>
+            </button>
+          
+            <!-- The part that collapses -->
+            <div class="controls-body">
+              <!-- Team filter -->
+                <div class="filter-group">
+                    <span class="filter-label">Team</span>
+                    <div class="filter-row">
+                    <button class="chip active" data-filter-team="All">All teams</button>
+                    <button class="chip" data-filter-team="Dallas Mavericks">Mavericks</button>
+                    <button class="chip" data-filter-team="Houston Rockets">Rockets</button>
+                    <button class="chip" data-filter-team="San Antonio Spurs">Spurs</button>
+                    </div>
+                </div>
+            
+                <!-- Jersey type filter -->
+                <div class="filter-group">
+                    <span class="filter-label">Jersey type</span>
+                    <div class="filter-row">
+                    <button class="chip active" data-filter-type="All">All types</button>
+                    <button class="chip" data-filter-type="Home">Home</button>
+                    <button class="chip" data-filter-type="Away">Away</button>
+                    <button class="chip" data-filter-type="City">City</button>
+                    <button class="chip" data-filter-type="Alternate">Alternate</button>
+                    <button class="chip" data-filter-type="Other">Other</button>
+                    </div>
+                </div>
+            
+                <!-- Year sort -->
+                <div class="filter-group">
+                    <span class="filter-label">Year</span>
+                    <div class="filter-row">
+                    <button class="chip active" data-sort="desc">Newest → Oldest</button>
+                    <button class="chip" data-sort="asc">Oldest → Newest</button>
+                    </div>
+                </div>
+            
+                <!-- View toggle -->
+                <div class="filter-group">
+                    <span class="filter-label">View</span>
+                    <div class="filter-row">
+                    <button class="chip active" data-view="grid">Grid view</button>
+                    <button class="chip" data-view="list">List view</button>
+                    <button class="chip" data-view="pattern">Patchwork</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+          
+
+    <main>
+        <div id="status-message" class="status-message">
+            Loading jerseys from Are.na…
+        </div>
+
+        <!-- Gallery container -->
+        <section id="gallery" class="gallery gallery-grid">
+            <!-- Cards injected here !!!!!!!!!!!!!!!!!!!!!!!!!!! via JS -->
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>
+            This archive is powered by the
+            <a href="https://www.are.na/developers" target="_blank" rel="noopener noreferrer">
+            Are.na API</a>.
+        </p>
+    </footer>
+  </div>
+
+  <script>
+    // 
+    // CONFIG
+    const channels = [
+        {
+            slug: 'dallas-mavericks-jerseys',
+            team: 'Dallas Mavericks',
+            short: 'DAL'
+        },
+        {
+            slug: 'houston-rockets-jerseys',
+            team: 'Houston Rockets',
+            short: 'HOU'
+        },
+        {
+            slug: 'san-antonio-spurs-jerseys',
+            team: 'San Antonio Spurs',
+            short: 'SAS'
+        }
+    ];
+
+    // up to 100 blocks per channel ? attempt yes it works yay
+    const PER_PAGE = 100; 
+
+    // Global state
+    const filters = {
+        team: 'All',
+        type: 'All',
+        // 'desc' (newest first) or 'asc'?
+        // 'grid' = list
+        sort: 'desc', 
+        view: 'grid'  
+    };
+
+    let allJerseys = [];
+
+    // 
+    // DOM ELEMENTS
+    // 
+    const galleryEl = document.getElementById('gallery');
+    const statusEl = document.getElementById('status-message');
+
+    // 
+    // HELPERS
+    
+
+    // Extract year + jersey type (Home / Away / City / Alternate / Other) from title string
+    // function parseMetadataFromTitle(title) {
+    //   if (!title) title = '';
+
+    //   const yearMatch = title.match(/(19|20)\d{2}/);
+    //   const year = yearMatch ? parseInt(yearMatch[0], 10) : null;
+
+    //   const lower = title.toLowerCase();
+    //   let jerseyType = 'Other';
+    //   if (lower.includes('home')) jerseyType = 'Home';
+    //   else if (lower.includes('away')) jerseyType = 'Away';
+    //   else if (lower.includes('city')) jerseyType = 'City';
+    //   else if (lower.includes('alternate') || lower.includes('alt')) jerseyType = 'Alternate';
+    //   else if (lower.includes('classic')) jerseyType = 'Classic';
+    //   else if (lower.includes('statement')) jerseyType = 'Statement';
+
+    //   // Normalize some extra labels back into "Other" so filters still work
+    //   if (!['Home', 'Away', 'City', 'Alternate'].includes(jerseyType)) {
+    //     jerseyType = 'Other';
+    //   }
+
+    //   return { year, jerseyType };
+    // }
+    // Extract year + jersey type from both title AND description
+    function parseMetadataFromBlock(block) {
+        const title = block.title || '';
+        const description = block.description || '';
+
+        // trying to get year (usually in the title, "2023")
+        const yearMatch =
+            title.match(/(19|20)\d{2}/) || description.match(/(19|20)\d{2}/);
+        const year = yearMatch ? parseInt(yearMatch[0], 10) : null;
+
+        // looking for jersey type words anywhere in title+description
+        const combined = (title + ' ' + description).toLowerCase();
+
+        let jerseyType = 'Other';
+        if (combined.includes('home')) jerseyType = 'Home';
+        else if (combined.includes('away')) jerseyType = 'Away';
+        else if (combined.includes('city')) jerseyType = 'City';
+        else if (combined.includes('alternate') || combined.includes('alt'))
+            jerseyType = 'Alternate';
+        else if (combined.includes('classic')) jerseyType = 'Classic';
+        else if (combined.includes('statement')) jerseyType = 'Statement';
+
+        // well norm to the main filter buckets
+        if (!['Home', 'Away', 'City', 'Alternate'].includes(jerseyType)) {
+            jerseyType = 'Other';
+        }
+
+        return { year, jerseyType };
+    }
+
+
+    // image URL from an Are.na Image block
+    function getImageUrlFromBlock(block) {
+        if (!block.image) return '';
+        if (block.image.original && block.image.original.url) {
+            return block.image.original.url;
+        }
+        if (block.image.display && block.image.display.url) {
+            return block.image.display.url;
+        }
+        return '';
+    }
+
+    // Building a small normalized jersey object from an Are.na block
+    // function buildJerseyFromBlock(block, channelConfig) {
+    //   if (block.class !== 'Image') return null; // focus on images for the archive
+
+    //   const imageUrl = getImageUrlFromBlock(block);
+    //   if (!imageUrl) return null; // skip if no usable image
+
+    //   const title = block.title || '';
+    // //   const { year, jerseyType } = parseMetadataFromTitle(title);
+    //     const { year, jerseyType } = parseMetadataFromBlock(block);
+
+    //   const altPieces = [
+    //     channelConfig.team,
+    //     year || '',
+    //     jerseyType !== 'Other' ? jerseyType : '',
+    //     'jersey'
+    //   ].filter(Boolean);
+
+    //   return {
+    //     id: block.id,
+    //     title,
+    //     team: channelConfig.team,
+    //     teamShort: channelConfig.short,
+    //     year,
+    //     type: jerseyType,
+    //     imageUrl,
+    //     alt: altPieces.join(' ')
+    //   };
+    // }
+    // function buildJerseyFromBlock(block, channelConfig) {
+    //     if (block.class !== 'Image') return null;
+
+    //     const imageUrl = getImageUrlFromBlock(block);
+    //     if (!imageUrl) return null;
+
+    //     const title = block.title || '';
+    //     const { year, jerseyType } = parseMetadataFromBlock(block);
+
+    //     const altPieces = [
+    //         channelConfig.team,
+    //         year || '',
+    //         jerseyType !== 'Other' ? jerseyType : '',
+    //         'jersey'
+    //     ].filter(Boolean);
+
+    //     // NEW: map to a CSS class I can style???  testing
+    //     let teamClass = '';
+    //     if (channelConfig.short === 'DAL') teamClass = 'team-dal';
+    //     else if (channelConfig.short === 'HOU') teamClass = 'team-hou';
+    //     else if (channelConfig.short === 'SAS') teamClass = 'team-sas';
+
+    //     return {
+    //         id: block.id,
+    //         title,
+    //         team: channelConfig.team,
+    //         teamShort: channelConfig.short,
+    //         year,
+    //         type: jerseyType,
+    //         imageUrl,
+    //         alt: altPieces.join(' '),
+    //         teamClass
+    //     };
+    // }
+
+    function buildJerseyFromBlock(block, channelConfig) {
+        if (block.class !== 'Image') return null;
+
+        const imageUrl = getImageUrlFromBlock(block);
+        if (!imageUrl) return null;
+
+        const title = block.title || '';
+        const { year, jerseyType } = parseMetadataFromBlock(block);
+
+        const altPieces = [
+            channelConfig.team,
+            year || '',
+            jerseyType !== 'Other' ? jerseyType : '',
+            'jersey'
+        ].filter(Boolean);
+
+        // Map team to CSS class
+        let teamClass = '';
+        if (channelConfig.short === 'DAL') teamClass = 'team-dal';
+        else if (channelConfig.short === 'HOU') teamClass = 'team-hou';
+        else if (channelConfig.short === 'SAS') teamClass = 'team-sas';
+
+        // NEW: map team to logo file
+        let logoPath = '';
+        if (channelConfig.short === 'DAL') logoPath = 'mavsLogo.png';
+        else if (channelConfig.short === 'HOU') logoPath = 'rocketsLogo.png';
+        else if (channelConfig.short === 'SAS') logoPath = 'spursLogo.png';
+
+        return {
+            id: block.id,
+            title,
+            team: channelConfig.team,
+            teamShort: channelConfig.short,
+            year,
+            type: jerseyType,
+            imageUrl,
+            alt: altPieces.join(' '),
+            teamClass,
+            logo: logoPath
+        };
+    }
+
+    
+    // RENDERING
+    
+    // function buildCardHTML(jersey) {
+    //   const yearLabel = jersey.year ? jersey.year : 'Year N/A';
+
+    //   return `
+    //     <article class="jersey-card" 
+    //              data-team="${jersey.team}" 
+    //              data-type="${jersey.type}" 
+    //              data-year="${jersey.year || ''}">
+    //       <div class="jersey-image-wrapper">
+    //         <img src="${jersey.imageUrl}" 
+    //              alt="${jersey.alt}" 
+    //              loading="lazy">
+    //       </div>
+    //       <div class="jersey-meta">
+    //         <div class="jersey-pill-row">
+    //           <span class="pill pill-team">${jersey.teamShort}</span>
+    //           <span class="pill pill-type">${jersey.type}</span>
+    //           <span class="pill pill-year">${yearLabel}</span>
+    //         </div>
+    //         <h2 class="jersey-title">
+    //           ${jersey.title || (jersey.teamShort + ' ' + yearLabel)}
+    //         </h2>
+    //       </div>
+    //     </article>
+    //   `;
+    // }
+    // function buildCardHTML(jersey) {
+    //     const yearLabel = jersey.year ? jersey.year : 'Year N/A';
+
+    //     return `
+    //         <article class="jersey-card ${jersey.teamClass}" 
+    //                 data-team="${jersey.team}" 
+    //                 data-type="${jersey.type}" 
+    //                 data-year="${jersey.year || ''}">
+    //         <div class="jersey-image-wrapper">
+    //             <img src="${jersey.imageUrl}" 
+    //                 alt="${jersey.alt}" 
+    //                 loading="lazy">
+    //         </div>
+    //         <div class="jersey-meta">
+    //             <div class="jersey-pill-row">
+    //             <span class="pill pill-team">${jersey.teamShort}</span>
+    //             <span class="pill pill-type">${jersey.type}</span>
+    //             <span class="pill pill-year">${yearLabel}</span>
+    //             </div>
+    //             <h2 class="jersey-title">
+    //             ${jersey.title || (jersey.teamShort + ' ' + yearLabel)}
+    //             </h2>
+    //         </div>
+    //         </article>
+    //     `;
+    // }
+    // function buildCardHTML(jersey) {
+    //     const yearLabel = jersey.year ? jersey.year : 'Year N/A';
+
+    //     return `
+    //         <article class="jersey-card ${jersey.teamClass}" 
+    //                 data-team="${jersey.team}" 
+    //                 data-type="${jersey.type}" 
+    //                 data-year="${jersey.year || ''}">
+            
+    //         <!-- PATCHWORK TILE (used only in Patchwork view) -->
+    //         <div class="patchwork-tile" 
+    //             style="background-image: url('${jersey.imageUrl}');">
+    //         </div>
+
+    //         <!-- Normal card view (Grid/List) -->
+    //         <div class="jersey-image-wrapper">
+    //             <img src="${jersey.imageUrl}" 
+    //                 alt="${jersey.alt}" 
+    //                 loading="lazy">
+    //         </div>
+    //         <div class="jersey-meta">
+    //             <div class="jersey-pill-row">
+    //                 <span class="pill pill-team">${jersey.teamShort}</span>
+    //                 <span class="pill pill-type">${jersey.type}</span>
+    //                 <span class="pill pill-year">${yearLabel}</span>
+    //             </div>
+    //             <h2 class="jersey-title">
+    //                 ${jersey.title || (jersey.teamShort + ' ' + yearLabel)}
+    //             </h2>
+    //         </div>
+    //         </article>
+    //     `;
+    // }
+    function buildCardHTML(jersey) {
+        const yearLabel = jersey.year ? jersey.year : 'Year N/A';
+
+        return `
+            <article class="jersey-card ${jersey.teamClass}" 
+                    data-team="${jersey.team}" 
+                    data-type="${jersey.type}" 
+                    data-year="${jersey.year || ''}">
+            
+            <!-- PATCHWORK TILE (used only in Patchwork view) -->
+            <div class="patchwork-tile" 
+                style="background-image: url('${jersey.imageUrl}');">
+            </div>
+
+            <!-- Normal card view (Grid/List) -->
+            <div class="jersey-image-wrapper">
+                <img src="${jersey.imageUrl}" 
+                    alt="${jersey.alt}" 
+                    loading="lazy">
+            </div>
+            <div class="jersey-meta">
+                <div class="jersey-pill-row">
+                    <span class="pill pill-team">
+                        <img 
+                            src="${jersey.logo}" 
+                            alt="${jersey.team} logo" 
+                            class="pill-team-logo"
+                        />
+                    </span>
+                    <span class="pill pill-type">${jersey.type}</span>
+                    <span class="pill pill-year">${yearLabel}</span>
+                </div>
+                <h2 class="jersey-title">
+                    ${jersey.title || (jersey.teamShort + ' ' + yearLabel)}
+                </h2>
+            </div>
+            </article>
+        `;
+    }
+
+
+
+    // replacing above (^) <span class="pill pill-team">${jersey.teamShort}</span>
+        // <div class="jersey-pill-row">
+        // <span class="pill pill-team">${jersey.teamShort}</span>
+        //         <span class="pill pill-type">${jersey.type}</span>
+        //         <span class="pill pill-year">${yearLabel}</span>
+        //         </div>
+    // the image logo needs to replace the three letters used to represent the team
+    // however, we need to dynamically update the logo based on what team it is:
+    // <span class="pill pill-team"><img class="logoImg" src="mavsLogo.png"></img>
+    // <span class="pill pill-team"><img class="logoImg" src="rocketsLogo.png"></img>
+    // <span class="pill pill-team"><img class="logoImg" src="spursLogo.png"></img>
+    // and then update the css to format the logos so they fit within the span class pill pill-team.
+
+    function applyViewClass() {
+        galleryEl.classList.toggle('gallery-grid', filters.view === 'grid');
+        galleryEl.classList.toggle('gallery-list', filters.view === 'list');
+        galleryEl.classList.toggle('gallery-pattern', filters.view === 'pattern');
+    }
+
+    function renderGallery() {
+        if (!allJerseys.length) {
+            statusEl.textContent = 'No jerseys found yet. Check your Are.na channels.';
+            statusEl.style.display = 'block';
+            galleryEl.innerHTML = '';
+            return;
+        }
+
+        // FILTERSSSS -----------------------------------------------------------------------------------------
+        // Filter by team
+        let visible = allJerseys.filter(jersey => {
+                if (filters.team === 'All') return true;
+                return jersey.team === filters.team;
+        });
+
+        // Filter by jersey type
+        visible = visible.filter(jersey => {
+            if (filters.type === 'All') return true;
+            return jersey.type === filters.type;
+        });
+
+        // YEAR SORT (fall back to 0 if missing)
+        visible.sort((a, b) => {
+            const yearA = a.year || 0;
+            const yearB = b.year || 0;
+            if (filters.sort === 'asc') {
+            return yearA - yearB;
+            }
+            return yearB - yearA;
+        });
+
+        if (!visible.length) {
+            statusEl.textContent = 'No jerseys match these filters yet.';
+            statusEl.style.display = 'block';
+            galleryEl.innerHTML = '';
+            return;
+        } else {
+            statusEl.style.display = 'none';
+        }
+
+        const html = visible.map(buildCardHTML).join('');
+        galleryEl.innerHTML = html;
+        applyViewClass();
+        enablePatchworkClicks();
+    }
+
+    function enablePatchworkClicks() {
+        const cards = document.querySelectorAll(".jersey-card");
+
+        cards.forEach(card => {
+            // Prevent adding multiple identical listeners to the same card
+            if (card.dataset.clickBound === "true") return;
+            card.dataset.clickBound = "true";
+
+            card.addEventListener("click", () => {
+            // Only expand/collapse in Patchwork view, quilt style
+            if (filters.view !== "pattern") return;
+            card.classList.toggle("expanded");
+            });
+        });
+    }
+
+    
+    // FETCHING FROM ARE.NA
+    
+    async function fetchChannel(channelConfig) {
+        const url = `https://api.are.na/v2/channels/${channelConfig.slug}/contents?page=1&per=${PER_PAGE}`;
+
+        const response = await fetch(url);
+        const data = await response.json();
+        const contents = data.contents || [];
+
+        contents.forEach(block => {
+            const jersey = buildJerseyFromBlock(block, channelConfig);
+            if (jersey) {
+            allJerseys.push(jersey);
+            }
+        });
+    }
+
+    async function loadAllChannels() {
+        statusEl.textContent = 'Loading jerseys from Are.na…';
+        statusEl.style.display = 'block';
+
+        try {
+            await Promise.all(channels.map(fetchChannel));
+            renderGallery();
+        } catch (error) {
+            console.error('Error fetching from Are.na:', error);
+            statusEl.textContent = 'There was a problem loading the archive.';
+            statusEl.style.display = 'block';
+        }
+    }
+    
+    // FILTER / SORT / VIEW CONTROLS
+    
+    function setActiveButton(clickedBtn, selector) {
+        const all = document.querySelectorAll(selector);
+        all.forEach(btn => btn.classList.remove('active'));
+        clickedBtn.classList.add('active');
+    }
+
+    function setupControls() {
+        // Team filters
+        document.querySelectorAll('[data-filter-team]').forEach(btn => {
+            btn.addEventListener('click', () => {
+            filters.team = btn.dataset.filterTeam;
+            setActiveButton(btn, '[data-filter-team]');
+            renderGallery();
+            });
+        });
+
+        // type filters
+        document.querySelectorAll('[data-filter-type]').forEach(btn => {
+            btn.addEventListener('click', () => {
+            filters.type = btn.dataset.filterType;
+            setActiveButton(btn, '[data-filter-type]');
+            renderGallery();
+            });
+        });
+
+        // year sort
+        document.querySelectorAll('[data-sort]').forEach(btn => {
+            btn.addEventListener('click', () => {
+            filters.sort = btn.dataset.sort;
+            setActiveButton(btn, '[data-sort]');
+            renderGallery();
+            });
+        });
+
+      // View toggle (grid / list)
+        document.querySelectorAll('[data-view]').forEach(btn => {
+            btn.addEventListener('click', () => {
+            filters.view = btn.dataset.view;
+            setActiveButton(btn, '[data-view]');
+            applyViewClass();
+            });
+        });
+
+        //  TRYING THIS OUT: collapse / expand filters
+        const controlsEl = document.getElementById('controls');
+        const filtersToggle = document.getElementById('filters-toggle');
+        if (controlsEl && filtersToggle) {
+            filtersToggle.addEventListener('click', () => {
+            controlsEl.classList.toggle('collapsed');
+            });
+        }
+    }
+
+    // INIT
+    setupControls();
+    loadAllChannels();
+  </script>
+</body>
+</html>
+
+
+
+<!-- additional NOTES THAT I UPDATED:
+    1. background to white? so jerseys pop out more? yes done
+    2. patchwork grid images - done
+    3. way to pop back filters from main viewing screen - done
+
+-->
